@@ -1,0 +1,18 @@
+@import './reset.css';
+@import './tailwind.css';
+
+.option.wrong code {
+    background-color: red;
+}
+
+.option.correct code {
+    background-color: green;
+}
+
+.option.wrong.selected code {
+    background-color: red;
+}
+
+.option.correct.selected code {
+    background-color: green;
+}

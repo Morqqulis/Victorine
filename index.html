@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class='group' lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/output.css">
+
+    <title>Victorine</title>
+</head>
+
+<body class='text-white bg-gray-800'>
+    <div class="wrapper">
+
+
+        <header class="py-10 mb-10 bg-gray-900 header">
+            <div class="header__container">
+                <h1 class='text-3xl text-center'>Welcome to Victorine</h1>
+
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="relative section start">
+                <div class="section__container">
+                    <div class='bg-gray-800 start-content' data-selected-category="">
+                        <h2 class="max-w-5xl py-5 mx-auto mb-10 text-4xl text-center text-white bg-orange-400 rounded-xl">Select a category</h2>
+                        <div class="flex flex-wrap items-center justify-center gap-5 mb-20 md:gap-10 md:mb-40">
+                            <button class='overflow-hidden group-[.html]:scale-75 group-[.html]:shadow-cyan-400 transition-all duration-300 shadow-xl category-btn shadow-black rounded-2xl hover:shadow-xl hover:shadow-red-500'
+                                    type='button' data-category="html"><img class='w-full h-auto rounded-2xl max-w-60 md:max-w-80' src="./assets/images/categories/html.png" alt="image"></button>
+                            <button class='overflow-hidden group-[.css]:scale-75 group-[.css]:shadow-cyan-400 transition-all duration-300 shadow-xl category-btn shadow-black rounded-2xl hover:shadow-xl hover:shadow-red-500'
+                                    type='button' data-category="css"><img class='w-full h-auto rounded-2xl max-w-60 md:max-w-80' src="./assets/images/categories/css.png" alt="image"></button>
+                            <button class='overflow-hidden group-[.js]:scale-75 group-[.js]:shadow-cyan-400 transition-all duration-300 shadow-xl category-btn shadow-black rounded-2xl hover:shadow-xl hover:shadow-red-500'
+                                    type='button' data-category="js"><img class='w-full h-auto rounded-2xl max-w-60 md:max-w-80' src="./assets/images/categories/js.png" alt="image"></button>
+                        </div>
+                        <div class='flex items-center justify-center h-full'>
+                            <button class='start-button scale-0 transition-all group-[.html]:scale-100 group-[.css]:scale-100 group-[.js]:scale-100 text-xl text-white duration-300 bg-blue-600 ease-in animate-bounce disabled:animate-none rounded-md md:text-3xl py-2.5 px-10 md:py-5 md:px-14 hover:bg-red-500 hover:scale-110 active:scale-90 disabled:bg-gray-400 disabled:hover:scale-100 disabled:cursor-not-allowed shadow-2xl shadow-black hover:shadow-red-600 active:shadow-cyan-400'
+                                    type="button" disabled>Start
+                                Quiz</button>
+                        </div>
+                    </div>
+
+
+
+                    <div
+                         class='quiz-content -z-10 invisible group-[.quiz]:visible absolute group-[.quiz]:z-0 inset-0 group-[.quiz]:static group-[.quiz]:opacity-100 duration-300 group-[.quiz]:scale-100 scale-0 opacity-0'>
+                        <h2 class='mb-5 text-3xl text-center text-orange-400 uppercase quiz-title'></h2>
+                        <div
+                             class='flex items-center justify-center max-w-4xl mx-auto text-2xl text-center quiz-text text-balance py-5 px-10 tracking-wider bg-[rgba(13,16,43,0.93)] rounded-2xl mb-10'>
+                        </div>
+                        <div class='max-w-[900px] mx-auto overflow-hidden'>
+                            <div class="w-0 h-2 max-w-5xl mb-10 duration-300 bg-red-500 rounded-2xl progress-bar" data-step='0'></div>
+                        </div>
+                        <div class="grid gap-5 bg-indigo-400 grid-cols-1 sm:grid-cols-2 rounded-2xl border border-[rgba(13,16,43,0.93)] quiz-options px-5 py-2.5 max-w-4xl mx-auto mb-10">
+                            <div class='grid option group' id='0'>
+                                <code
+                                      class='flex items-center justify-center py-6 sm:px-5 sm:py-10 text-xl duration-300 cursor-pointer bg-slate-600 hover:bg-slate-400 rounded-xl group-[.selected]:scale-90 group-[.selected]:bg-orange-500 group-[.wrong]:bg-red-500 group-[.correct]:bg-green-500'></code>
+                            </div>
+
+                            <div class='grid option group' id='1'>
+                                <code
+                                      class='flex items-center justify-center py-6 sm:px-5 sm:py-10 text-xl duration-300 cursor-pointer bg-slate-600 hover:bg-slate-400 rounded-xl group-[.selected]:scale-90 group-[.selected]:bg-orange-500 group-[.wrong]:bg-red-500 group-[.correct]:bg-green-500'></code>
+                            </div>
+
+                            <div class='grid option group' id='2'>
+                                <code
+                                      class='flex items-center justify-center py-6 sm:px-5 sm:py-10 text-xl duration-300 cursor-pointer bg-slate-600 hover:bg-slate-400 rounded-xl group-[.selected]:scale-90 group-[.selected]:bg-orange-500 group-[.wrong]:bg-red-500 group-[.correct]:bg-green-500'></code>
+                            </div>
+
+                            <div class='grid option group' id='3'>
+                                <code
+                                      class='flex items-center justify-center py-6 sm:px-5 sm:py-10 text-xl duration-300 cursor-pointer bg-slate-600 hover:bg-slate-400 rounded-xl group-[.selected]:scale-90 group-[.selected]:bg-orange-500 group-[.wrong]:bg-red-500 group-[.correct]:bg-green-500'></code>
+                            </div>
+                        </div>
+                        <button class='block px-8 py-4 mx-auto mb-10 text-2xl duration-200 bg-blue-500 shadow-xl confirm-button rounded-2xl hover:bg-blue-700 active:scale-90'
+                                type="button">Confirm</button>
+                        <div class="flex items-center justify-center max-w-lg px-4 py-8 mx-auto text-3xl font-bold text-center text-red-500 duration-300 scale-0 result bg-neutral-950 rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+
+            </div>
+        </footer>
+    </div>
+
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
