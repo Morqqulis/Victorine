@@ -110,10 +110,10 @@ const optionsElements = document.querySelectorAll('.option')
 let questionGenerated = false
 let currentQuestion
 let answeredQuestionsCount = 0
-let correctAnswersCount = 0 // Добавленная переменная для подсчета правильных ответов
-let wrongAnswersCount = 0 // Добавленная переменная для подсчета неправильных ответов
-const totalQuestionsCount = 5 // Установите общее количество вопросов здесь
-const askedQuestions = [] // Массив для отслеживания уже заданных вопросов
+let correctAnswersCount = 0
+let wrongAnswersCount = 0
+const totalQuestionsCount = 5
+const askedQuestions = []
 
 const handleSelectCategory = e => {
     const startBtn = document.querySelector('.start-button')
@@ -139,16 +139,15 @@ const renderQuestionAndAnswers = () => {
         option.classList.remove('correct', 'wrong')
     })
 
-    let availableQuestions = questions[category].filter(question => !askedQuestions.includes(question)) // Получаем список доступных вопросов
+    let availableQuestions = questions[category].filter(question => !askedQuestions.includes(question))
     if (availableQuestions.length === 0) {
-        // Если все вопросы были уже заданы, очищаем массив и заново заполняем
-        askedQuestions.length = 0
-        availableQuestions = questions[category]
+        endGame() // Завершаем игру, если все вопросы были заданы
+        return // Выходим из функции, чтобы избежать ошибок при попытке задать новый вопрос
     }
 
     const randomQuestionIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[randomQuestionIndex]
-    askedQuestions.push(currentQuestion) // Добавляем текущий вопрос в массив уже заданных вопросов
+    askedQuestions.push(currentQuestion)
     const answersElements = document.querySelectorAll('.option code')
     const quizTitle = document.querySelector('.quiz-text')
     quizTitle.textContent = currentQuestion.question
@@ -224,6 +223,19 @@ const updateProgressBar = () => {
     progressBar.style.width = newWidth + '%'
 }
 
+const endGame = () => {
+    html.classList.add('game-end')
+    const dialog = document.querySelector('.dialog')
+    dialog.parentElement.classList.replace('scale-0', 'scale-100')
+    dialog.innerHTML = `
+        <h3 class="text-3xl font-bold">Game Over</h3>
+        <p class="text-xl text-green-600">Correct: ${correctAnswersCount}</p>
+        <p class="text-xl text-red-600" >Wrong: ${wrongAnswersCount}</p>
+        <button class="new-game bg-blue-500 animate-bounce px-6 text-white hover:bg-blue-800 duration-300 hover:animate-none mt-5 rounded-xl py-4 focus:outline-none border-none active:scale-90" type="button">Play Again</button>
+    `
+    dialog.showModal()
+}
+
 html.addEventListener('click', e => {
     const target = e.target
 
@@ -236,5 +248,8 @@ html.addEventListener('click', e => {
         selectOption(e)
     } else if (target.closest('.confirm-button')) {
         handleConfirmAnswer()
+    }
+    if (target.closest('.new-game')) {
+        location.reload()
     }
 })
