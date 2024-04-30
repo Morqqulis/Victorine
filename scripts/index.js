@@ -138,7 +138,7 @@ const renderQuestionAndAnswers = () => {
 
     optionsElements.forEach(option => {
         option.classList.remove('correct', 'wrong')
-        option.disabled = false // Убираем атрибут disabled у всех элементов с классом .option перед отображением нового вопроса
+        option.disabled = false 
     })
 
     let availableQuestions = questions[category].filter(question => !askedQuestions.includes(question))
