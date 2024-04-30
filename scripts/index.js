@@ -137,12 +137,13 @@ const renderQuestionAndAnswers = () => {
 
     optionsElements.forEach(option => {
         option.classList.remove('correct', 'wrong')
+        option.disabled = false // Убираем атрибут disabled у всех элементов с классом .option перед отображением нового вопроса
     })
 
     let availableQuestions = questions[category].filter(question => !askedQuestions.includes(question))
     if (availableQuestions.length === 0) {
-        endGame() // Завершаем игру, если все вопросы были заданы
-        return // Выходим из функции, чтобы избежать ошибок при попытке задать новый вопрос
+        endGame()
+        return
     }
 
     const randomQuestionIndex = Math.floor(Math.random() * availableQuestions.length)
@@ -182,19 +183,25 @@ const selectOption = e => {
 
 const handleConfirmAnswer = () => {
     const selectedOption = document.querySelector('.option.selected')
+    const options = document.querySelectorAll('.option') // Получаем все элементы с классом .option
     if (selectedOption && !questionGenerated) {
         const isCorrect = checkAnswer(selectedOption, currentQuestion)
         selectedOption.classList.add(isCorrect ? 'correct' : 'wrong')
+
+        // Добавляем атрибут disabled ко всем элементам с классом .option
+        options.forEach(option => {
+            option.disabled = true
+        })
 
         questionGenerated = true
         setTimeout(() => {
             questionGenerated = false
             currentQuestion = renderQuestionAndAnswers()
             updateAnswerClasses()
-            updateResult(isCorrect)
         }, 1500)
-        updateProgressBar()
+        updateResult(isCorrect)
         answeredQuestionsCount++
+        updateProgressBar()
     }
 }
 
@@ -219,7 +226,7 @@ const updateProgressBar = () => {
     const progressBar = document.querySelector('.progress-bar')
     const answeredQuestionsPercentage = (answeredQuestionsCount / totalQuestionsCount) * 100
 
-    const newWidth = Math.min(answeredQuestionsPercentage + 20, 100)
+    const newWidth = Math.min(answeredQuestionsPercentage, 100)
     progressBar.style.width = newWidth + '%'
 }
 
